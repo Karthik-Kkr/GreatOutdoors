@@ -8,6 +8,8 @@ public interface IOrderService {
 	OrderDto addOrder(OrderDto orderDto);
 	OrderDto viewOrder(String orderId);
 	List<OrderDto> viewAll();
-	void deleteOrder(String orderId);
-
+	void cancelOrder(String orderId);
+	void cancelProduct(String orderId, String productId);
+	String dispatchDate();
+	
 }

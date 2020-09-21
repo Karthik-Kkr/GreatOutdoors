@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.go.order.model.OrderDto;
-import com.capgemini.go.order.service.OrderServiceImpl;
+import com.capgemini.go.order.service.IOrderService;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
 	@Autowired
-	OrderServiceImpl orderService;
+	IOrderService orderService;
 	
 	@PostMapping("/add")
 	public OrderDto addOrder(@RequestBody OrderDto orderDto) {
@@ -38,9 +38,21 @@ public class OrderController {
 	}
 	
 	@DeleteMapping("/delete/orderId/{orderId}")
-	public void deleteOrder(@PathVariable String orderId) {
+	public void cancelOrder(@PathVariable String orderId) {
 		
-		orderService.deleteOrder(orderId);
+		orderService.cancelOrder(orderId);
+	}
+	
+	@DeleteMapping("/delete/orderId/{orderId}/productId/{productId}")
+	public void cancelProduct(@PathVariable String orderId,@PathVariable String productId) {
+		
+		orderService.cancelProduct(orderId,productId);
+	}
+	
+	@GetMapping("/dispatcherDate/{orderId}")
+	public String dispatcherDate(@PathVariable String orderId) {
+		
+		return orderService.dispatchDate();
 	}
 }
 
