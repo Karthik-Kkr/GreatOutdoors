@@ -1,6 +1,8 @@
 package com.capgemini.go.order.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public OrderDto addOrder(OrderDto orderDto) {
 		
-		orderDto.setProductUniqueNo(random.nextInt(1000));
+		orderDto.setProductUniqueNo(random.nextInt());
+		orderDto.setOrderInitiateTime(LocalDateTime.now());
+		orderDto.setOrderDispatchTime(LocalDateTime.of(date.plusDays(2), LocalTime.now()));
+		
 		return orderRepository.save(orderDto);
 	}
 

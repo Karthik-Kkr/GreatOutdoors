@@ -15,7 +15,7 @@ public class OrderDto {
 	private String productId;
 	private int productUniqueNo;
 	private String addressId;
-	private byte orderDispatcherStatus;
+	private int orderDispatcherStatus;
 	private LocalDateTime orderInitiateTime;
 	private LocalDateTime orderDispatchTime;
 	
@@ -25,7 +25,7 @@ public class OrderDto {
 	}
 
 	public OrderDto(String orderId, String userId, String productId, int productUniqueNo, String addressId,
-			byte orderDispatcherStatus, LocalDateTime orderInitiateTime, LocalDateTime orderDispatchTime) {
+			int orderDispatcherStatus, LocalDateTime orderInitiateTime, LocalDateTime orderDispatchTime) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
@@ -77,11 +77,11 @@ public class OrderDto {
 		this.addressId = addressId;
 	}
 
-	public byte getOrderDispatcherStatus() {
+	public int getOrderDispatcherStatus() {
 		return orderDispatcherStatus;
 	}
 
-	public void setOrderDispatcherStatus(byte orderDispatcherStatus) {
+	public void setOrderDispatcherStatus(int orderDispatcherStatus) {
 		this.orderDispatcherStatus = orderDispatcherStatus;
 	}
 
