@@ -3,6 +3,7 @@ package com.capgemini.go.order.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements IOrderService {
 	
 	LocalDate date=LocalDate.now();
 	LocalDate dispatchDate=date.plusDays(2);
-	LocalDate cantCancel=dispatchDate.MAX;
+	Period cantCancel=Period.between(dispatchDate, date.plusDays(10));
 	
 	@Override
 	public OrderDto addOrder(OrderDto orderDto) {
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements IOrderService {
 		if(!orderRepository.existsById(orderId)) {
 			throw new OrderIdNotFoundException("The given OrderId is not present");
 		}
-		if((dispatchDate.compareTo(cantCancel))>0 || (dispatchDate.compareTo(cantCancel)==0)) {
+		if(cantCancel==Period.between(dispatchDate, date.plusDays(10))){
 			throw new CancelException("You cannot cancel your order because it was already dispatched");
 		}
 		orderRepository.deleteById(orderId); 
