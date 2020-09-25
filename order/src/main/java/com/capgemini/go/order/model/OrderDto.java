@@ -1,6 +1,7 @@
 package com.capgemini.go.order.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_dto")
 public class OrderDto {
-	
+
 	@Id
 	private String orderId;
 	private String userId;
@@ -16,16 +17,16 @@ public class OrderDto {
 	private int productUniqueNo;
 	private String addressId;
 	private int orderDispatcherStatus;
-	private LocalDateTime orderInitiateTime;
-	private LocalDateTime orderDispatchTime;
-	
+	private LocalDate orderInitiateTime;
+	private LocalDate orderDispatchTime;
+
 	public OrderDto() {
 		super();
 
 	}
 
 	public OrderDto(String orderId, String userId, String productId, int productUniqueNo, String addressId,
-			int orderDispatcherStatus, LocalDateTime orderInitiateTime, LocalDateTime orderDispatchTime) {
+			int orderDispatcherStatus, LocalDate orderInitiateTime, LocalDate orderDispatchTime) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
@@ -65,8 +66,8 @@ public class OrderDto {
 		return productUniqueNo;
 	}
 
-	public void setProductUniqueNo(int productUniqueNo) {
-		this.productUniqueNo = productUniqueNo;
+	public void setProductUniqueNo(int i) {
+		this.productUniqueNo = i;
 	}
 
 	public String getAddressId() {
@@ -85,20 +86,83 @@ public class OrderDto {
 		this.orderDispatcherStatus = orderDispatcherStatus;
 	}
 
-	public LocalDateTime getOrderInitiateTime() {
+	public LocalDate getOrderInitiateTime() {
 		return orderInitiateTime;
 	}
 
-	public void setOrderInitiateTime(LocalDateTime orderInitiateTime) {
+	public void setOrderInitiateTime(LocalDate orderInitiateTime) {
 		this.orderInitiateTime = orderInitiateTime;
 	}
 
-	public LocalDateTime getOrderDispatchTime() {
+	public LocalDate getOrderDispatchTime() {
 		return orderDispatchTime;
 	}
 
-	public void setOrderDispatchTime(LocalDateTime orderDispatchTime) {
+	public void setOrderDispatchTime(LocalDate orderDispatchTime) {
 		this.orderDispatchTime = orderDispatchTime;
+	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
+		result = prime * result + ((orderDispatchTime == null) ? 0 : orderDispatchTime.hashCode());
+		result = prime * result + orderDispatcherStatus;
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((orderInitiateTime == null) ? 0 : orderInitiateTime.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + productUniqueNo;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderDto other = (OrderDto) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
+		if (orderDispatchTime == null) {
+			if (other.orderDispatchTime != null)
+				return false;
+		} else if (!orderDispatchTime.equals(other.orderDispatchTime))
+			return false;
+		if (orderDispatcherStatus != other.orderDispatcherStatus)
+			return false;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (orderInitiateTime == null) {
+			if (other.orderInitiateTime != null)
+				return false;
+		} else if (!orderInitiateTime.equals(other.orderInitiateTime))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		if (productUniqueNo != other.productUniqueNo)
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
 	}
 
 	@Override
@@ -107,4 +171,5 @@ public class OrderDto {
 				+ productUniqueNo + ", addressId=" + addressId + ", orderDispatcherStatus=" + orderDispatcherStatus
 				+ ", orderInitiateTime=" + orderInitiateTime + ", orderDispatchTime=" + orderDispatchTime + "]";
 	}
+	
 }
